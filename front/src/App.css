@@ -1,0 +1,215 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* App.css 또는 index.css 예시 */
+body {
+    font-family: 'Pretendard', 'Noto Sans KR', sans-serif; /* 가독성 좋은 폰트 우선 적용 */
+    line-height: 1.6; /* 기본 줄 간격 */
+    color: #333; /* 기본 텍스트 색상 */
+    background-color: #f8f9fa; /* 부드러운 배경색 */
+    margin: 0;
+    padding: 0;
+}
+
+.app-container {
+    max-width: 900px; /* 최대 너비 제한 */
+    margin: 0 auto; /* 중앙 정렬 */
+    padding: 20px;
+}
+
+header h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+}
+
+.results-area h3 { /* 결과 영역의 부제목 스타일 */
+    margin-top: 25px;
+    margin-bottom: 10px;
+    color: #34495e;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.ai-answer-content {
+    font-size: 1.05em;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    white-space: pre-wrap; /* LLM이 생성한 개행 유지 */
+}
+
+.sources-list {
+    list-style-type: decimal; /* 번호 매기기 목록 */
+    padding-left: 20px;
+}
+
+.source-item {
+    margin-bottom: 8px;
+    font-size: 0.95em;
+}
+
+.source-item .source-link {
+    color: #16a085; /* 링크 색상 */
+    text-decoration: none;
+}
+.source-item .source-link:hover {
+    text-decoration: underline;
+}
+
+.source-domain {
+    color: #7f8c8d;
+    font-size: 0.85em;
+    margin-left: 5px;
+}
+
+.citation-link { /* 답변 내 인용 링크 스타일 */
+    color: #2980b9;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer; /* 클릭 가능함을 표시 */
+}
+.citation-link:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    color: #c0392b; /* 오류 메시지 색상 */
+    background-color: #f9ebea;
+    border: 1px solid #e74c3c;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 15px;
+}
+
+.source-item.highlight {
+    background-color: #f1c40f; /* 예시 하이라이트 색상 */
+    transition: background-color 0.3s ease-out;
+}
+
+.toggle-sources-button {
+    background-color: #ecf0f1;
+    border: 1px solid #bdc3c7;
+    color: #2c3e50;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+.toggle-sources-button:hover {
+    background-color: #e0e6e8;
+}
+
+.feedback-section button {
+    background-color: transparent;
+    border: 1px solid #bdc3c7;
+    padding: 5px 10px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.feedback-section button:hover:not(:disabled) {
+    background-color: #f0f0f0;
+}
+.feedback-section button:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+.feedback-section button.selected { /* 선택된 피드백 버튼 스타일 */
+    background-color: #2ecc71; /* 예: '유용함' 선택 시 */
+    color: white;
+    border-color: #27ae60;
+}
+.feedback-section button.selected.unhelpful { /* '개선필요' 선택 시 다른 색상 가능 */
+    background-color: #e74c3c;
+    border-color: #c0392b;
+}
+
+/* ... (이전 CSS) ... */
+.answer-segment {
+    display: inline; /* 또는 block, p 태그 등으로 각 세그먼트를 감쌀 수 있음 */
+    margin-right: 5px; /* 세그먼트 간 간격 */
+}
+.citations-for-segment {
+    display: inline-block; /* 인라인으로 표시되면서도 마진/패딩 적용 가능 */
+    margin-left: 2px;
+}
+.citation-marker {
+    font-size: 0.8em;
+    font-weight: bold;
+    color: #2980b9;
+    cursor: pointer;
+    margin: 0 2px;
+    padding: 1px 3px;
+    border-radius: 3px;
+    transition: background-color 0.2s;
+}
+.citation-marker:hover {
+    background-color: #e0e0e0;
+}
+
+.citation-tooltip {
+    position: absolute; /* 마우스 위치에 따라 동적으로 표시 */
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    padding: 10px;
+    border-radius: 4px;
+    z-index: 1000; /* 다른 요소 위에 표시 */
+    max-width: 300px; /* 툴팁 최대 너비 */
+    font-size: 0.9em;
+}
+.citation-tooltip strong {
+    display: block;
+    margin-bottom: 5px;
+}
+.citation-tooltip p { /* 인용구 스타일 */
+    font-style: italic;
+    margin: 5px 0;
+    color: #555;
+}
+.citation-tooltip a {
+    color: #16a085;
+    text-decoration: none;
+    display: block;
+    margin-top: 5px;
+}
+.citation-tooltip a:hover {
+    text-decoration: underline;
+}
