@@ -118,23 +118,31 @@ function ResultsDisplay({ userQuery, answer, sources }) {
             {sources && sources.length > 0 && (
                 <div className="sources-section">
                     <h3>참고한 출처:</h3>
-                    <ul className="sources-list">
+                    <div className="sources-card-container">
                         {displayedSources.map((source) => (
-                            <li key={source.id} id={`source-item-${source.id}`} className="source-item">
-                                <span className="source-number">[{source.id}]</span>
-                                <a href={source.url} target="_blank" rel="noopener noreferrer" className="source-link">
-                                    {source.title || "제목 없음"}
-                                </a>
-                                <span className="source-domain"> ({new URL(source.url).hostname})</span>
-                            </li>
+                            <div key={source.id} id={`source-item-${source.id}`} className="source-card">
+                                <div className="source-card-thumbnail">
+                                    {/* 썸네일 이미지가 있다면 여기에 표시 */}
+                                    {/* 예: <img src={source.thumbnailUrl || "default_thumbnail.png"} alt={source.title} /> */}
+                                </div>
+                                <div className="source-card-content">
+                                    <h5 className="source-card-title">
+                                        <a href={source.url} target="_blank" rel="noopener noreferrer" className="source-link">
+                                            {source.title || "제목 없음"}
+                                        </a>
+                                    </h5>
+                                    <p className="source-card-url">({new URL(source.url).hostname})</p>
+                                    {/* <p className="source-card-snippet">{source.snippet}</p> */}
+                                </div>
+                            </div>
                         ))}
-                    </ul>
-                    {sources.length > initialSourcesToShow && (
-                        <button onClick={handleToggleSources} className="toggle-sources-button">
-                            {showAllSources ? '간략히 보기' : `전체 출처 보기 (${sources.length}개)`}
-                        </button>
-                    )}
-                </div>
+                    </div>
+                {sources.length > initialSourcesToShow && (
+                    <button onClick={handleToggleSources} className="toggle-sources-button">
+                        {showAllSources ? '간략히 보기' : `전체 출처 보기 (${sources.length}개)`}
+                    </button>
+                )}
+            </div>
             )}
         </div>
     );
