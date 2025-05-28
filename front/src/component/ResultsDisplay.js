@@ -72,7 +72,7 @@ function ResultsDisplay({ userQuery, answer, sources }) {
         };
 
         try {
-            const response = await fetch('/api/v1/feedback', {
+            const response = await fetch('http://localhost:8001/api/v1/feedback', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(feedbackPayload)

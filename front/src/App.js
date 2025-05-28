@@ -20,7 +20,7 @@ function App() {
         setError(null);
 
         try {
-            const response = await fetch('/api/v1/search/stream', {
+            const response = await fetch('http://localhost:8001/api/v1/search/stream', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', },
                 body: JSON.stringify({ query: searchQuery }),
@@ -42,6 +42,7 @@ function App() {
             while (true) {
                 const { done, value } = await reader.read();
                 if (done) {
+                  console.log(`progressUpdates: ${decoder.decode(value, { stream: true })}`);
                     if (!progressUpdates.some(p => p.is_final)) {
                          setError("검색 결과 스트림이 비정상적으로 종료되었습니다.");
                     }
@@ -69,6 +70,7 @@ function App() {
                             }
 
                             if (progressData.is_final && progressData.data) {
+                                setError(null);
                                 setFinalResult(progressData.data);
                                 setIsLoading(false);
                                 reader.cancel();
@@ -92,7 +94,6 @@ function App() {
         }
 
     }, [progressUpdates, finalResult, error, isLoading]);
-
 
     return (
       <ErrorBoundary>
