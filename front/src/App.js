@@ -23,11 +23,10 @@ function App() {
         let errorOccurredInStream = false; // 로컬 플래그: 스트림 처리 중 오류 발생 여부
 
         try {
-          console.log(query)
             const response = await fetch('http://localhost:8001/api/v1/search/stream', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', },
-                body: JSON.stringify({ query: query }),
+                body: JSON.stringify({ query: searchQuery }),
             });
 
             if (!response.ok) {
@@ -112,7 +111,7 @@ function App() {
             });
             setIsLoading(false);
         }
-    }, [query, error]);
+    }, [error]);
 
     return (
       <ErrorBoundary>
